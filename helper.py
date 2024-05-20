@@ -9,7 +9,6 @@ from ultralytics import YOLO
 from PIL import Image
 import time
 import os
-@st.cache_resource
 def load_model(model_path):
     """
     Loads a YOLO object detection model from 
@@ -66,13 +65,20 @@ def play_webcam(model):
         try:
             vid_cap = cv2.VideoCapture(0)
             st_frame = st.empty()
-            while (vid_cap.isOpened()):
+            stop_button = st.button("Stop")
+            while vid_cap.isOpened() and not stop_button:
                 success, image = vid_cap.read()
                 if success:
-                    display_detected_frames(model,st_frame,image)
+                    res = model.predict(image)
+                    # Plot detected objects on video frame
+                    res_plotted = res[0].plot()
+                    st_frame.image(res_plotted,caption='Webcam is Live!',channels="BGR",use_column_width="auto")
                 else:
+                    st.write("The video capture ended")
                     vid_cap.release()
                     break
+            vid_cap.release()
+            cv2.destroyAllWindows()
         except Exception as e:
             st.sidebar.error("Error loading video: " + str(e))
                   

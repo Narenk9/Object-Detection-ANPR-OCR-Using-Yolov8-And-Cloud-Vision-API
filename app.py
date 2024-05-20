@@ -13,17 +13,15 @@ from io import BytesIO
 import components
 import helper
 # Setting page layout
-
 st.set_page_config(
     page_title ="ANPR using Yolo",
     page_icon="🚀",
     layout ="wide",
     initial_sidebar_state='expanded'
 )
-
 client = vision.ImageAnnotatorClient.from_service_account_json('anpryolo.json')
-# Model options
-model_type = st.sidebar.radio('Select Task', ['Object Detection','License Plate Detection','OCR'])
+st.sidebar.header("Things you can do!!")
+model_type = st.sidebar.radio('Select', ['Object Detection','License Plate Detection','ANPR + OCR'])
 
 @st.cache_resource
 def get_model_path(model_type):
@@ -42,11 +40,11 @@ def load_model(model_path):
         st.error(f"Unable to load model. Check the specified Path:{model_path}")
         st.error(e)
 
-st.sidebar.header("Image/Video Configuration")
+st.sidebar.header("Types of Sources")
 
 if model_type=='License Plate Detection':
     st.header("Automatic Number Plate Recognition using Yolo",divider='rainbow')
-    src_radio = st.sidebar.radio("Select Source",['Image','Video'])
+    src_radio = st.sidebar.radio("Select",['Image','Video'])
     model_path = get_model_path(model_type)
     model = load_model(model_path)
     src_image =None
@@ -180,10 +178,8 @@ elif model_type=='OCR':
                     except Exception as e:
                        st.error("Google Cloud Vision API is disabled by Owner")
 else:
-    # Any file Object Detection
-    #st.title("Object Detection using Yolo")
     st.header('Object Detection using Yolo', divider='rainbow')
-    src_radio = st.sidebar.radio("Select Source",['Image','Video','Webcam'])
+    src_radio = st.sidebar.radio("Select",['Image','Video','Webcam'])
     model_path = get_model_path(model_type)
     model = load_model(model_path)
     src_image =None
@@ -241,3 +237,7 @@ else:
             helper.infer_uploaded_video(model,src_video)
     else:
         helper.play_webcam(model)
+profile_pic_path = str(components.profile_pic)
+with open(profile_pic_path, 'rb') as f:
+    image_data = f.read()
+st.sidebar.image(image_data,caption='Made By Naren Karthikeya',use_column_width="auto")# Model options
