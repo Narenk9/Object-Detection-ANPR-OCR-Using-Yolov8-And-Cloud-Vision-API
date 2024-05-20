@@ -1,7 +1,6 @@
 # Base image with minimal dependencies
 FROM python:3.12.3-slim
-# Expose the required port
-EXPOSE 8080
+
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
         ffmpeg \
@@ -26,9 +25,10 @@ RUN apt-get update && \
 WORKDIR /app
 # Copy the application code
 COPY . .
+ENV PORT = 
 # Command to run the Streamlit app
-ENTRYPOINT ["streamlit", "run", "app.py", "–server.port=8080", "--server.fileWatcherType", "none"]
-
+# ENTRYPOINT ["streamlit", "run", "app.py", "–server.port=8080", "--server.fileWatcherType", "none"]
+CMD streamlit run app.py --server.port=${PORT}  --browser.serverAddress="0.0.0.0"
 
 
 
