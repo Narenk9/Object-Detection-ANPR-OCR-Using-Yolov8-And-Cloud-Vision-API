@@ -22,17 +22,12 @@ RUN apt-get update && \
     pip install --no-cache-dir \
         ultralytics\
         moviepy
-
 # Set the working directory
 WORKDIR /app
-
 # Copy the application code
 COPY . .
-
-
-
 # Command to run the Streamlit app
-ENTRYPOINT ["streamlit", "run", "app.py", "–server.port=8080", "–server.address=0.0.0.0"]
+ENTRYPOINT ["streamlit", "run", "app.py", "–server.port=8080", "--server.fileWatcherType", "none"]
 
 
 
