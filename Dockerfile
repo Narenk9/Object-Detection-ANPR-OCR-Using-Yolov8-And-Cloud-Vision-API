@@ -25,10 +25,11 @@ RUN apt-get update && \
 WORKDIR /app
 # Copy the application code
 COPY . .
-ENV PORT = 
+ENV PORT = 8080
+EXPOSE ${PORT}
 # Command to run the Streamlit app
 # ENTRYPOINT ["streamlit", "run", "app.py", "–server.port=8080", "--server.fileWatcherType", "none"]
-CMD streamlit run app.py --server.port=${PORT}  --browser.serverAddress="0.0.0.0"
+ENTRYPOINT streamlit run app.py --server.port=${PORT}  --browser.serverAddress="0.0.0.0"
 
 
 
