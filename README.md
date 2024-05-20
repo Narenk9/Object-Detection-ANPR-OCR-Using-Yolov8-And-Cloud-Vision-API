@@ -12,7 +12,7 @@ This project is a web application that performs object detection, license plate 
 
 ## Datasets
 
-- **Source:** The license plate dataset was sourced from [Roboflow](https://roboflow.com/).
+- **Source:** The license plate dataset was sourced from [Roboflow](https://universe.roboflow.com/ong-aun-jie-heuag/car-plate-detection-p4bwm).
 - **Annotations:** The dataset includes annotated images.
   - **Train Set:** 1050 images
   - **Test Set:** 75 images
@@ -33,40 +33,9 @@ This project is a web application that performs object detection, license plate 
 - **Docker:** The application was containerized using a Dockerfile, resulting in a Docker image size of approximately 2.5GB.
 - **Hosting:** Deployed using Google Cloud services, specifically Artifact Registry and Google Cloud Run.
 
-## Installation and Usage
-
-### Prerequisites
-
-- Docker
-- Google Cloud account with necessary permissions for Cloud Run and Artifact Registry
-- Streamlit
-
-### Steps
-
-1. **Clone the repository:**
-
-   ```bash
-   git clone https://github.com/Narenk9/Object-Detection-ANPR-OCR-Using-Yolov8-And-Cloud-Vision-API.git
-   cd Object-Detection-ANPR-OCR-Using-Yolov8-And-Cloud-Vision-API
-   ```
-
-2. **Build the Docker image:**
-
-   ```bash
-   docker build -t anpr-ocr-app .
-   ```
-
-3. **Run the Docker container:**
-
-   ```bash
-   docker run -p 8501:8501 anpr-ocr-app
-   ```
-
-4. **Access the application:**
-
-   Open your web browser and navigate to `http://localhost:8501`.
-
 ## Deployment on Google Cloud Run
+
+**Note that Google Cloud Run Uses PORT:8080, where as streamlit's default port is 8501**
 
 1. **Authenticate with Google Cloud:**
 
@@ -90,14 +59,6 @@ This project is a web application that performs object detection, license plate 
 4. **Access the deployed application:**
 
    The URL for the deployed application will be provided after successful deployment. Open it in your web browser.
-
-## Contributing
-
-Contributions are welcome! Please fork the repository and use a feature branch. Pull requests are gladly accepted.
-
-## License
-
-This project is licensed under the MIT License.
 
 ## Acknowledgements
 
