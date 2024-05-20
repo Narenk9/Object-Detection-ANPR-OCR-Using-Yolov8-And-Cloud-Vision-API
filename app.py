@@ -19,7 +19,7 @@ st.set_page_config(
     layout ="wide",
     initial_sidebar_state='expanded'
 )
-client = vision.ImageAnnotatorClient.from_service_account_json('anpryolo.json')
+client = vision.ImageAnnotatorClient.from_service_account_json('YOUR JSON FILE')
 st.sidebar.header("Things you can do!!")
 model_type = st.sidebar.radio('Select', ['Object Detection','License Plate Detection','ANPR + OCR'])
 
