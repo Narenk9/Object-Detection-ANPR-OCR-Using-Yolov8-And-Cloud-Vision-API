@@ -1,0 +1,40 @@
+STAR
+the real struggle is when there is no one to tell you / advise you where 
+you are doing the mistakes. No one to help me with ultralytics docs/ dependency
+ issues, docker issues , file directory issues. no structured explaination
+ always looking to 
+1. So the problem faced was as I am using Google's api and 
+a lot of packages and putting them into the requirements file 
+made the installation much more longer and making the image size around 9GB
+solution :  https://jpetazzo.github.io/2013/12/01/docker-python-pip-requirements/
+Used multi staging approach
+2.  when I was deciding whether to use Yolo V9 or V8  there were a 
+lot of dependence issues and compatibility issues as well compared to Yolo V8 
+
+3. I was able to reduce the size due to 
+the downloading the package on runtime using os
+https://github.com/ultralytics/ultralytics/issues/8465
+
+Reduced the file from 8Gb to x
+
+4. Since streamlit reruns the app with each user interaction, 
+are python packages being reimported every time as well?
+solution https://discuss.streamlit.io/t/does-it-make-sense-to-cache-package-imports/52686
+
+5. solution 
+https://stackoverflow.com/questions/55313610/importerror-libgl-so-1-cannot-open-shared-object-file-no-such-file-or-directo
+
+6. Google cloud platform port issues with streamlit port issues
+https://medium.com/dsights/streamlit-deployment-on-google-cloud-serverless-container-platform-1a8330d29062
+
+7. Web Camera not opening CV2 issues in docker 
+accessing cam is not possible , so using new open source framework WEBRTC
+https://www.googlecloudcommunity.com/gc/Google-Kubernetes-Engine-GKE/How-to-attach-an-external-device-camera-to-a-container/m-p/726156  
+
+https://softwarescalability.com/editorial/real-time-object-detection-with-webrtc-and-yolo
+https://fulldataalchemist.medium.com/building-your-own-real-time-object-detection-app-roboflow-yolov8-and-streamlit-part-5-f71474a3c216
+
+deployment procedure:
+
+docker build -t asia-south1-docker.pkg.dev/yolo-project-423915/yolo-repo/IMAGE_NAME:TAG .
+docker push asia-south1-docker.pkg.dev/yolo-project-423915/yolo-repo/IMAGE_NAME:TAG
