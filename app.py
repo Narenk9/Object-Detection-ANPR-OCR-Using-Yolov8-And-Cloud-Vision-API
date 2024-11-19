@@ -209,18 +209,23 @@ else:
             else:
                 if st.sidebar.button('Detect Objects'):
                     # predict user's image
-                    res = model.predict(uploaded_image)
-                    boxes = res[0].boxes
+                    results = model.predict(uploaded_image)
+                    boxes = results[0].boxes
                     if len(boxes) == 0:
                         st.error("No objects detected in the image.")
                     else:
-                        res_plotted = res[0].plot()[:, :, ::-1]
-                        st.image(res_plotted, caption='Detected Image',
+                        res_plotted = results[0].plot()[:, :, ::-1]
+                        st.image(res_plotted, caption="{} Objects detected!".format(len(boxes)),
                                 use_column_width=True)
+                        count =0
                         try:
-                            with st.expander("Detection Results"):
-                                for box in boxes:
-                                    st.write(box.data)
+                            hash={}
+                            for box in boxes:
+                                class_label = model.names[int(box.cls)]
+                                hash[class_label] = hash.get(class_label,0)+1
+
+                            st.success(hash)
+                            st.balloons()
                         except Exception as ex:
                             st.write("No image is uploaded yet!")
     elif src_radio=='Video':  
